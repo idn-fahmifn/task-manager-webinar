@@ -31,6 +31,20 @@ class MemberController extends Controller
         //
     }
 
+    public function simpan(Request $request, $id)
+    {
+        $input = $request->all();
+        $request->validate([
+            'nama' => ['required', 'string', 'min:3', 'max:50'],
+            'telpon' => ['required', 'string', 'min:10', 'max:15']
+        ]);
+
+        $input['team_id'] = $id;
+        Member::create($input);
+        return back();
+
+    }
+
     /**
      * Display the specified resource.
      */
