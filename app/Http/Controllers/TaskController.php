@@ -15,6 +15,21 @@ class TaskController extends Controller
         //
     }
 
+    public function simpan(Request $request, $id)
+    {
+        $input = $request->all();
+        $request->validate([
+            'judul_task' => ['required', 'string', 'min:3', 'max:50'],
+            'deskripsi' => ['required'],
+            'start_date' => ['required'],
+            'end_date' => ['required'],
+        ]);
+
+        $input['team_id'] = $id;
+        Task::create($input);
+        return back();
+    }
+
     /**
      * Show the form for creating a new resource.
      */
